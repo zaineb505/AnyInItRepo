@@ -1,0 +1,214 @@
+
+
+<div class="form-step" routerLink="/github-repos" [class.active]="isActiveStep(0)">
+
+  <div class="container">
+    <h2>Gestion du Code GitHub
+    </h2>
+
+    <!-- Sélection de l'opération Git -->
+    <div class="form-group">
+      <label for="operation">Opération Git</label>
+      <select [(ngModel)]="selectedOperation" class="form-control">
+        <option value="clone">Cloner un dépôt</option>
+        <option value="commit-push">Commit & Push</option>
+        <option value="create-branch">Créer une branche</option>
+        <option value="pull-request">Créer une Pull Request</option>
+      </select>
+      <small class="form-hint">Choisissez l'opération Git à effectuer</small>
+
+    </div>
+    <!-- ========== CLONAGE ========== -->
+    <div *ngIf="selectedOperation === 'clone'" class="section">
+      <div class="form-group">
+
+        <h3>Cloner un Dépôt</h3>
+        <!-- Section Liste des Dépôts -->
+        <div class="section">
+          <h3>Mes Dépôts</h3>
+          <select [(ngModel)]="selectedRepo" class="form-control" (change)="onRepoSelected($event)">
+            <option *ngFor="let repo of repos" [value]="repo.clone_url">
+              {{ repo.name }} ({{ repo.default_branch }})
+            </option>
+          </select>
+          <small class="form-hint">Choisissez l'URL de votre Repository Github</small>
+
+        </div>
+        <ng-template #noRepos>
+          <p>Aucun dépôt trouvé</p>
+        </ng-template>
+      </div>
+
+      <!-- Section Clonage -->
+      <div class="section">
+        <div class="form-group">
+          <label>URL du Dépôt</label>
+          <input type="text" [(ngModel)]="selectedRepo" class="form-control">
+          <small class="form-hint">L'URL du Depot sélectionné</small>
+
+        </div>
+        <div class="form-group">
+          <label>Branche</label>
+          <input type="text" [(ngModel)]="selectedBranch" class="form-control">
+          <small class="form-hint">La Branche de votre Repository Github</small>
+
+        </div>
+
+        <button (click)="onClone()" class="btn btn-primary">Cloner le dépot </button>
+      </div>
+    </div>
+    <!-- ========== COMMIT & PUSH ========== -->
+  <div *ngIf="selectedOperation === 'commit-push'" class="section">
+      <h3>Commit & Push</h3>
+      <div class="form-group">
+        <label>Chemin local du dépôt :</label>
+    <input type="text"
+           [(ngModel)]="localRepoPath"
+           name="localRepoPath"
+           required
+           #localPathRef="ngModel"
+           class="form-control"
+           placeholder="C:/projets/mon-depot">
+    <div *ngIf="localPathRef.invalid && localPathRef.touched" class="text-danger">
+      Chemin requis.
+    </div>  
+      </div>
+      <div class="form-group">
+        <label>URL du dépôt distant :</label>
+<input type="text"
+       [(ngModel)]="remoteUrl"
+       name="remoteUrl"
+       required
+       #remoteUrlRef="ngModel"
+       class="form-control"
+       placeholder="https://github.com/..." />
+
+<div *ngIf="remoteUrlRef.invalid && remoteUrlRef.touched" class="text-danger">
+  L'URL est requise.
+</div>
+      </div>
+      <div class="form-group">
+        <label>Branche distante :</label>
+        <select [(ngModel)]="pushBranch" class="form-control">
+          <option value="main">main</option>
+          <option value="master">master</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message de commit :</label>
+    <textarea [(ngModel)]="commitMessage"
+              name="commitMessage"
+              required
+              #commitRef="ngModel"
+              class="form-control"
+              rows="3"></textarea>
+    <div *ngIf="commitRef.invalid && commitRef.touched" class="text-danger">
+      Message requis.
+    </div>  
+      </div>
+      <button (click)="onCommitAndPush()" class="btn btn-primary">
+        <i class="fas fa-cloud-upload-alt"></i> Commit & Push
+      </button>
+    </div>
+
+
+
+<div *ngIf="selectedOperation === 'pull-request'" class="operation-section">
+  <h3><i class="fas fa-sync-alt me-2"></i>Pull Latest Changes</h3>
+
+  <!-- Repository Selection -->
+  <div class="form-group">
+    <label>GitHub Repository:</label>
+    <select [(ngModel)]="selectedRepo" (change)="onRepoSelected($event)" class="form-control">
+      <option value="">-- Select a repository --</option>
+      <option *ngFor="let repo of repos" [value]="repo.clone_url">
+        {{ repo.name }} ({{ repo.default_branch }})
+      </option>
+    </select>
+    <small *ngIf="repos.length === 0" class="text-muted">
+      No repositories available. Please load your GitHub repositories first.
+    </small>
+  </div>
+
+  <!-- Branch Selection -->
+  <div class="form-group">
+    <label>Branch:</label>
+    <input type="text" [(ngModel)]="pullBranch" class="form-control" placeholder="main">
+  </div>
+
+  <!-- Local Path Selection -->
+  <div class="form-group">
+    <label>Local Path:</label>
+    <div class="input-group">
+<input type="text"
+       [(ngModel)]="pullRepoPath"
+       name="pullRepoPath"
+       required
+       #pathRef="ngModel"
+       class="form-control"
+       placeholder="C:/Users/...">
+<div *ngIf="pathRef.invalid && pathRef.touched" class="text-danger small">
+  Le chemin est requis.
+</div>    </div>
+  </div>
+
+  <!-- Pull Button -->
+        <button (click)="onPull()" class="btn btn-primary"> pull changes</button>
+
+
+  <!-- Results -->
+  <div *ngIf="pullResult" class="mt-3 alert"
+       [class.alert-success]="pullResult.success"
+       [class.alert-danger]="!pullResult.success">
+    <div class="d-flex align-items-center">
+      <i class="fas me-2"
+         [class.fa-check-circle]="pullResult.success"
+         [class.fa-exclamation-circle]="!pullResult.success"></i>
+      <span>{{ pullResult.message }}</span>
+    </div>
+
+    <div *ngIf="pullResult.changedFiles?.length" class="mt-2">
+      <h6>Changed Files:</h6>
+      <ul class="list-group small">
+        <li *ngFor="let file of pullResult.changedFiles" class="list-group-item">
+          <i class="fas me-2" [ngClass]="getChangeIcon(file)"></i>
+          {{ file.split(': ')[1] }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+<div class="form-step" [class.active]="isActiveStep(1)">
+  <div class="container">
+
+    <h2>Build & Test</h2>
+    <!-- contenu du formulaire build/test -->
+
+    <app-gitlab-ci></app-gitlab-ci>
+    <!--<router-outlet *ngIf="isActiveStep(1)"></router-outlet>-->
+
+  </div>
+</div>
+<div class="form-step" [class.active]="isActiveStep(2)">
+  <div class="container">
+
+    <h2>Conteneurisation</h2>
+    <!-- docker -->
+  </div>
+</div>
+<div class="form-step" [class.active]="isActiveStep(3)">
+  <div class="container">
+
+    <h2>Déploiement</h2>
+    <!-- kubernetes -->
+  </div>
+</div>
+<div class="form-step" [class.active]="isActiveStep(4)">
+  <div class="container">
+
+    <h2>Monitoring</h2>
+    <!-- monitoring -->
+  </div>
+</div>

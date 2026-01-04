@@ -1,0 +1,30 @@
+<header class="platform-header">
+  <div class="header-left">
+    <img src="assets/logo2.png" alt="Logo" class="navbar-logo">
+    <nav class="nav-links">
+      <a routerLink="/github-repos" class="nav-link">Pipeline</a>
+      <a routerLink="/documentation" class="nav-link" routerLinkActive="active">Documents</a>    </nav>
+  </div>
+
+  <div class="header-right">
+    <span class="user-name">{{ userName }}</span>
+
+    <div class="profile-dropdown">
+      <div class="profile-image-container" (click)="toggleDropdown()">
+        <img *ngIf="userImage"
+             [src]="userImage"
+             alt="Profile"
+             class="profile-image"
+             (error)="handleImageError()">
+        <div *ngIf="!userImage" class="profile-initials">{{ userInitials }}</div>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="isDropdownOpen">
+        <div class="dropdown-username">{{ userName }}</div>
+        <button class="dropdown-item" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

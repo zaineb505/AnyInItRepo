@@ -1,0 +1,352 @@
+:root {
+  --blue-main: #2563eb;
+  --blue-light: #060550;
+  --blue-hover: #1e40af;
+  --green-light: #10b981;
+  --gray-light: #f8fafc;
+  --gray-border: #e2e8f0;
+  --gray-text: #4a5568;
+  --gray-dark: #2d3748;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Global */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--gray-light);
+  color: var(--gray-text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout */
+.doc-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.doc-sidenav {
+  width: 240px;
+  padding: 2rem 1.5rem;
+  background-color: var(--gray-light);
+  border-right: 1px solid var(--gray-border);
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+.doc-sidenav h3 {
+  color: var(--blue-main);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.doc-sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--gray-text);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--blue-main);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Main content */
+.doc-content {
+  flex: 1;
+  padding: 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.doc-content h2 {
+  color: var(--gray-dark);
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--blue-light);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.doc-content p {
+  font-size: 1.05rem;
+  color: var(--gray-text);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Sections */
+.platform-purpose,
+.note,
+.quick-steps,
+.value-props {
+  background-color: var(--gray-light);
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--blue-main);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.note {
+  border-left-color: var(--green-light);
+  background-color: #f0fdf4;
+}
+
+/* Benefits */
+.beginner-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 2rem;
+}
+
+.benefit-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.benefit-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--blue-main);
+}
+
+h3 {
+  color: var(--blue-main);
+  font-size: 1.3rem;
+  margin-top: 2.5rem;
+}
+
+h4 {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-dark);
+}
+
+/* Table */
+.tech-comparison {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.tech-comparison th {
+  background-color: var(--blue-light);
+  color: white;
+  padding: 0.75rem;
+}
+
+.tech-comparison td {
+  background-color: white;
+  border-bottom: 1px solid var(--gray-border);
+  padding: 0.75rem;
+}
+
+/* CTA */
+.cta-note {
+  font-style: italic;
+  margin-top: 0.75rem;
+  color: #64748b;
+}
+
+/* Images */
+img.demo-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-border);
+}
+
+/* Steps */
+.quick-steps ol,
+.workflow-steps {
+  padding-left: 1.25rem;
+}
+
+.quick-steps li,
+.workflow-steps li {
+  margin-bottom: 0.75rem;
+}
+
+.step {
+  border-left: 3px solid var(--gray-border);
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .doc-layout {
+    flex-direction: column;
+  }
+
+  .doc-sidenav {
+    width: 100%;
+    position: static;
+    height: auto;
+    border-bottom: 1px solid var(--gray-border);
+    padding: 1rem;
+  }
+
+  .doc-content {
+    padding: 1.5rem;
+  }
+
+  .beginner-benefits {
+    grid-template-columns: 1fr;
+  }
+}
+.platform-purpose,
+.quick-steps,
+.value-props,
+.tutorial-section,
+.note {
+  background-color: #e0f2fe; /* bleu très clair */
+  border-left: 4px solid #2563eb; /* bleu vif */
+}
+.benefit-card {
+  background-color: #f0f9ff; /* bleu pâle */
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
+}
+.doc-sidenav {
+  background-color: #f8f7ff; /* bleu foncé */
+  color: white;
+}
+
+.nav-link {
+  color: #a9d6e5;
+}
+
+.nav-link:hover {
+  background-color: #1e40af; /* bleu plus foncé au survol */
+  color: #fff;
+}
+.doc-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #041d55; /* Bleu principal */
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #3b82f6; /* Soulignement bleu clair */
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+.navbar-logo {
+  height: 50px; /* Fixed height for logo */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.navbar-logo {
+    height: 50px; /* Slightly smaller logo on mobile */
+  }
+.navbar-logo:hover {
+  transform: scale(1.05); /* Subtle hover effect */
+}
+/* Section principale */
+.simple-end {
+
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Boîte commune */
+.summary-box,
+.support-box,
+.action-box {
+  background-color: #e0f2fe; /* bleu très clair */
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Titres */
+.simple-end h3 {
+  color: #2563eb;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+/* Listes */
+.summary-box ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.summary-box li {
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+
+
+/* Lien email */
+.support-link {
+  color: #2563eb;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.support-link:hover {
+  text-decoration: underline;
+}
+
+/* Action CTA */
+.action-box {
+  text-align: center;
+}
+
+.action-box p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+/* Bouton */
+.action-button {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #1e40af;
+}

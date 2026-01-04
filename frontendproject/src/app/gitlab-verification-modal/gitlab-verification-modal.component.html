@@ -1,0 +1,34 @@
+
+<div class="verification-modal">
+  <h2 class="modal-title">{{ data.title }}</h2>
+
+  <div class="modal-content">
+    <p>{{ data.message }}</p>
+
+    <div class="verification-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <a [href]="data.verificationUrl" target="_blank" class="verification-link">
+            Compléter la vérification SMS sur GitLab
+          </a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <button mat-raised-button color="primary" (click)="confirm()" class="confirm-button">
+            J'ai terminé la vérification
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button mat-button (click)="cancel()">
+      Annuler
+    </button>
+  </div>
+</div>

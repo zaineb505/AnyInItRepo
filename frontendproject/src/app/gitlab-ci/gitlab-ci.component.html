@@ -1,0 +1,101 @@
+<form (ngSubmit)="generatePipeline()" class="container">
+  <h2>Build & Test</h2>
+
+  <!-- URL du dépôt GitLab -->
+  <div class="form-group">
+    <label for="repoUrl">URL du dépôt GitLab</label>
+  <input type="text"
+         id="repoUrl"
+         name="repoUrl"
+         [(ngModel)]="gitlabRepoUrl"
+         #repoUrlRef="ngModel"
+         required
+         class="form-control"
+         placeholder="https://gitlab.com/...">
+  <div *ngIf="repoUrlRef.invalid && repoUrlRef.touched" class="text-danger small">
+    L'URL du dépôt est requise.
+  </div>
+    <small class="form-hint">L'URL du Dépot GitLab importé par GitHub </small>
+
+  </div>
+
+  <!-- Sélection du langage -->
+  <div class="form-group">
+    <label for="language">Langage du projet</label>
+    <select [(ngModel)]="selectedLanguage" name="language" class="form-control" (change)="selectedDockerImage = ''">
+      <option value="nodejs">Node.js</option>
+      <option value="java_maven">Java-maven</option>
+      <option value="java_gradle">Java-gradle</option>
+
+      <option value="python">Python</option>
+    </select>
+    <small class="form-hint">Choisissez le(s) Langage(s) sur lequel(s) vous voulez travailler </small>
+
+  </div>
+
+  <!-- Sélection de l'image Docker -->
+  <div class="form-group">
+    <label>Image Docker</label>
+    <div class="docker-images">
+      <div *ngFor="let image of dockerImages[selectedLanguage]" class="docker-image-option">
+        <input type="radio" id="{{image.image}}" name="dockerImage" [(ngModel)]="selectedDockerImage"
+          [value]="image.image">
+        <label for="{{image.image}}">{{ image.name }}</label>
+      </div>
+    </div>
+    <small class="form-hint">La Version D'image(s) Docker </small>
+  </div>
+
+  <!-- Sélection des jobs -->
+  <div class="form-group">
+    <label>Nom Du Job</label>
+    <div class="job-option">
+      <input type="checkbox" id="includeBuild" [(ngModel)]="includeBuild" name="includeBuild">
+      <label for="includeBuild">Build</label>
+    </div>
+    <div class="job-option">
+      <input type="checkbox" id="includeTest" [(ngModel)]="includeTest" name="includeTest">
+      <label for="includeTest">Test</label>
+    </div>
+    <small class="form-hint">Le job GitLab à exécuter</small>
+
+  </div>
+
+  <!-- Boutons -->
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Générer le pipeline</span>
+      <span *ngIf="isLoading">Génération en cours...</span>
+    </button>
+
+    <button *ngIf="showYamlPreview" type="button" class="btn btn-success" (click)="deployPipeline()"
+      [disabled]="isLoading">
+      Déployer sur GitLab
+    </button>
+  </div>
+
+</form>
+
+<!-- Aperçu du YAML généré 
+<div *ngIf="showYamlPreview" class="yaml-preview">
+  <h3>Fichier .gitlab-ci.yml généré</h3>
+  <pre>{{ generatedYaml }}</pre>
+</div>-->
+
+<!-- Aperçu ou édition du fichier YAML -->
+<div *ngIf="showYamlPreview" class="yaml-preview">
+  <h3>Fichier .gitlab-ci.yml généré</h3>
+
+  <!-- Zone d'édition si activée -->
+  <div *ngIf="isEditingYaml">
+    <textarea [(ngModel)]="editedYaml" rows="20" cols="80" class="form-control"></textarea>
+    <br>
+    <button class="btn btn-primary" (click)="confirmYamlEdit()">OK</button>
+  </div>
+
+  <!-- Affichage en lecture seule sinon -->
+  <div *ngIf="!isEditingYaml">
+    <pre>{{ generatedYaml }}</pre>
+    <button class="btn btn-primary" (click)="enableEditing()">Modifier</button>
+  </div>
+</div>

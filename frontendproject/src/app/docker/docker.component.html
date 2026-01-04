@@ -1,0 +1,150 @@
+<div class="container">
+  <form (ngSubmit)="startContainerization()" class="deployment-form">
+    <h2>Conteneurisation Automatique</h2>
+
+    <!-- URL du dépôt GitLab -->
+    <div class="form-group">
+      <label for="repoUrl">URL du dépôt GitLab</label>
+  <input type="text"
+         id="repoUrl"
+         name="repoUrl"
+         [(ngModel)]="deploymentData.repoUrl"
+         #repoUrlRef="ngModel"
+         required
+         class="form-control"
+         placeholder="https://gitlab.com/votre/projet.git">
+  <div *ngIf="repoUrlRef.invalid && repoUrlRef.touched" class="text-danger small">
+    L'URL du dépôt est requise.
+  </div>
+      <small class="form-hint">Collez simplement l'URL de votre projet GitLab</small>
+    </div>
+
+    <!-- Nom de l'image Docker -->
+    <div class="form-group">
+      <label for="imageName">Nom de l'image Docker</label>
+ <input type="text"
+         id="imageName"
+         name="imageName"
+         [(ngModel)]="deploymentData.imageName"
+         #imageNameRef="ngModel"
+         pattern="^auto-[a-zA-Z0-9\-]+$"
+         class="form-control"
+         placeholder="Expl : auto-Image">
+  <div *ngIf="imageNameRef.invalid && imageNameRef.touched" class="text-danger small">
+    Le nom doit commencer par <strong>auto-</strong> (ex: auto-monimage).
+  </div>
+      <small class="form-hint">Nommer votre image Docker auto-Name</small>
+    </div>
+
+    <!-- Port d'exposition -->
+    <div class="form-group">
+      <label for="hostPort">Port d'exposition</label>
+      <input type="number" id="hostPort" [(ngModel)]="deploymentData.hostPort"
+             placeholder="8080" name="hostPort" class="form-control" 
+             min="1024" max="65535">
+      <small class="form-hint">Port sur lequel l'application sera accessible</small>
+    </div>
+
+    <!-- Boutons -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="!deploymentData.repoUrl || isLoading">
+        <i class="fas" [ngClass]="isLoading ? 'fa-spinner fa-spin' : 'fa-rocket'"></i>
+        {{ isLoading ? 'Déploiement en cours...' : 'Déployer' }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Résultats du déploiement -->
+  <div *ngIf="result" class="result-panel">
+    <div class="success-header">
+      <i class="fas fa-check-circle success-icon"></i>
+      <h3>Votre application est prête !</h3>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="card-icon"><i class="fas fa-id-card"></i></div>
+        <div class="card-content">
+          <h4>ID du Conteneur</h4>
+          <p class="truncate">{{ result.containerId }}</p>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="card-icon"><i class="fas fa-plug"></i></div>
+        <div class="card-content">
+          <h4>Accès à l'application</h4>
+          <a [href]="'http://'+serverIp+':'+result.port" target="_blank" class="app-link">
+            Ouvrir dans un nouvel onglet
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journal de construction -->
+    <div class="logs-section">
+      <div class="logs-header" (click)="showLogs = !showLogs">
+        <h4>
+          <i class="fas fa-terminal"></i> Journal de construction
+          <i class="fas" [ngClass]="showLogs ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </h4>
+      </div>
+      <div class="logs-content" *ngIf="showLogs">
+        <pre>{{ result.buildLogs }}</pre>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button class="btn btn-info" (click)="viewContainerDetails()">
+        <i class="fas fa-chart-bar"></i> Statistiques
+      </button>
+      <button class="btn btn-danger" (click)="stopContainer()">
+        <i class="fas fa-power-off"></i> Éteindre
+      </button>
+    </div>
+  </div>
+
+  <!-- Gestion des erreurs -->
+  <div *ngIf="error" class="error-panel">
+    <div class="error-header">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3>Oups ! Quelque chose s'est mal passé</h3>
+    </div>
+    <p class="error-message">{{ error }}</p>
+    <button class="btn btn-warning" (click)="retry()">
+      <i class="fas fa-redo"></i> Réessayer
+    </button>
+  </div>
+</div>
+
+
+  <!-- Nouvelle section pour les logs en temps réel -->
+  <div *ngIf="isLoading" class="logs-section realtime-logs">
+    <div class="logs-header" (click)="showRealtimeLogs = !showRealtimeLogs">
+      <h4>
+        <i class="fas fa-terminal"></i> Logs en temps réel
+        <i class="fas" [ngClass]="showRealtimeLogs ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+      </h4>
+    </div>
+    <div class="logs-content" *ngIf="showRealtimeLogs">
+      <div class="log-container">
+        <div *ngFor="let log of realTimeLogs" class="log-line">
+          {{ log }}
+        </div>
+        <div *ngIf="realTimeLogs.length === 0" class="empty-logs">
+          <i class="fas fa-circle-notch fa-spin"></i> En attente des logs...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Votre résultat existant -->
+  <div *ngIf="result" class="result-panel">
+    <!-- ... contenu existant ... -->
+  </div>
+
+  <!-- Votre panneau d'erreur existant -->
+  <div *ngIf="error" class="error-panel">
+    <!-- ... contenu existant ... -->
+  </div>

@@ -1,0 +1,24 @@
+<div class="steps">
+  <div class="step" [class.active]="isActive('/github-repos')" (click)="goTo('/github-repos')">
+    <div class="circle">1</div>
+    <div class="label">Gestion du Code</div>
+  </div>
+  <div class="step" [class.active]="isActive('/gitlab-ci')" (click)="goTo('/gitlab-ci')">
+    <div class="circle">2</div>
+    <div class="label">Build & Test</div>
+  </div>
+  <div class="step" [class.active]="isActive('/docker')" (click)="goTo('/docker')">
+    <div class="circle">3</div>
+    <div class="label">Conteneurisation</div>
+  </div>
+  <div class="step" [class.active]="isActive('/kubernetes')" (click)="goTo('/kubernetes')">
+    <div class="circle">4</div>
+    <div class="label">Déploiement</div>
+  </div>
+  <div class="step" [class.active]="isActive('/monitoring')" (click)="goTo('/monitoring')">
+    <div class="circle">5</div>
+    <div class="label">Monitoring</div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

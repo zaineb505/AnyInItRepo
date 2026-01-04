@@ -1,0 +1,120 @@
+/* Steps Container - Simple and Clean */
+.steps {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+  position: relative;
+}
+
+/* Step Indicator - Minimal Design */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+/* Circle - Simple Blue Outline */
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e0e6ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #95a5a6;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+/* Label - Clean Typography */
+.label {
+  margin-top: 8px;
+  color: #95a5a6;
+  font-size: 0.85rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Active Step - Solid Blue */
+.step.active .circle {
+  background: #1e5cb9;
+  border-color: #1e5cb9;
+  color: white;
+}
+
+.step.active .label {
+  color: #1e5cb9;
+  font-weight: 500;
+}
+
+/* Progress Line - Simple Grey */
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  height: 2px;
+  background: #e0e6ed;
+  z-index: 1;
+}
+
+/* Active Progress Line - Blue */
+.step.active::before,
+.step.completed::before {
+  background: #1e5cb9;
+}
+
+/* Hover States */
+.step:hover .circle {
+  border-color: #1e5cb9;
+}
+
+.step:hover .label {
+  color: #2c3e50;
+}
+
+/* Router Outlet - Clean Container */
+router-outlet {
+  display: block;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+/* Responsive - Stack on Mobile */
+@media (max-width: 600px) {
+  .steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .step {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .label {
+    margin-top: 0;
+  }
+
+  .steps::before {
+    display: none;
+  }
+}
+/* Add padding to account for fixed header */
+:host {
+  display: block;
+  padding-top: 60px; /* matches header height */
+  min-height: 100vh;
+}

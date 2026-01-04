@@ -1,0 +1,186 @@
+/* Form Container */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(30, 92, 185, 0.1);
+}
+
+h2 {
+  color: #1e5cb9;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e6f0f9;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Input Fields */
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d9e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #1e5cb9;
+  box-shadow: 0 0 0 3px rgba(30, 92, 185, 0.1);
+  outline: none;
+}
+
+/* Radio and Checkbox Options */
+.docker-images, .job-option {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.docker-image-option, .job-option {
+  display: flex;
+  align-items: center;
+}
+
+.docker-image-option input[type="radio"],
+.job-option input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: 18px;
+  accent-color: #1e5cb9;
+}
+
+.docker-image-option label,
+.job-option label {
+  color: #5d6d7e;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.docker-image-option:hover label,
+.job-option:hover label {
+  color: #1e5cb9;
+}
+
+/* Form Hints */
+.form-hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: #95a5a6;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Buttons */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e5cb9 0%, #3a7bd5 100%);
+  color: white;
+  box-shadow: 0 2px 10px rgba(30, 92, 185, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1a4b8c 0%, #2a6fd6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(30, 92, 185, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  box-shadow: 0 2px 10px rgba(39, 174, 96, 0.2);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #219653 0%, #27ad5f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* YAML Preview */
+.yaml-preview {
+  margin-top: 3rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border-left: 4px solid #1e5cb9;
+}
+
+.yaml-preview h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.yaml-preview pre {
+  background: #2c3e50;
+  color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+.text-danger {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}

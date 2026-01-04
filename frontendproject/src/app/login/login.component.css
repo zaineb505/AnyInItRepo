@@ -1,0 +1,245 @@
+/* Main container - white with very subtle blue fade at bottom */
+/* Main container with background photo and overlay */
+.centered-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
+    url('/assets/backlogin.jpg') center/cover no-repeat;
+  padding: 20px;
+  position: relative;
+}
+
+/* Blue degradation overlay */
+.centered-login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 92, 185, 0.05) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(58, 123, 213, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Card styling with glass effect */
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(30, 92, 185, 0.1);
+  z-index: 1;
+}
+
+/* Blue degradation effect (corner accent) */
+.login-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(
+    circle at 70% 70%,
+    rgba(58, 123, 213, 0.15) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+}
+
+/* Rest of your styles remain the same */
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(30, 92, 185, 0.1));
+}
+
+.app-title {
+  color: #1e5cb9;
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.app-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1e5cb9 0%, rgba(30, 92, 185, 0) 80%);
+}
+
+/* ... (keep all other existing styles) ... */
+
+/* Card styling with blue degradation effects */
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 40px 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 20px rgba(4, 44, 104, 0.925),
+    0 0 0 1px rgba(30, 92, 185, 0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blue degradation effect (corner accent) */
+.login-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 70% 70%, rgba(58, 123, 213, 0.1) 0%, transparent 70%);
+  z-index: 0;
+}
+
+/* Content container (above the degradation effect) */
+.login-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo styling */
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(30, 92, 185, 0.1));
+}
+
+/* Title with blue text degradation */
+.app-title {
+  color: #1e5cb9;
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.app-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1e5cb9 0%, rgba(30, 92, 185, 0) 80%);
+}
+
+.app-subtitle {
+  color: #6b7c95;
+  margin: 20px 0 30px 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Button with blue degradation */
+.login-btn.github-btn {
+  background: linear-gradient(135deg, #132e57 0%, #3a7bd5 100%);
+  color: white;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(30, 92, 185, 0.15);
+}
+
+.login-btn.github-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 92, 185, 0.2);
+}
+
+.login-btn.github-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.5s;
+}
+
+.login-btn.github-btn:hover::before {
+  left: 100%;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
+
+/* Footer text with blue degradation */
+.footer-text {
+  color: #a0aec0;
+  font-size: 11px;
+  margin: 25px 0 0 0;
+  line-height: 1.5;
+  position: relative;
+}
+
+.footer-text::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(30, 92, 185, 0.2), transparent);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card {
+  animation: fadeIn 0.6s ease-out forwards;
+}

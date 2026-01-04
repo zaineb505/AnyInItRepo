@@ -1,0 +1,81 @@
+stages:
+  - build
+  - test
+  - push
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  CHROME_BIN: "/usr/bin/google-chrome"
+
+before_script:
+  - docker info   # utile pour les jobs avec Docker
+
+build_images:
+  stage: build
+  image: docker:24.0.2
+  services:
+    - docker:24.0.2-dind
+  script:
+    - echo "📦 Build des images frontend et backend"
+    - docker compose -f compose.yaml build
+    - docker save -o docker-images.tar $(docker images --format '{{.Repository}}' | grep deployanyinit)
+  artifacts:
+    paths:
+      - docker-images.tar
+    expire_in: 1 hour
+
+test_frontend:
+  stage: test
+  image: node:20-slim
+  before_script:
+    - apt-get update
+    - apt-get install -y wget gnupg unzip curl xvfb
+    - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+    - apt-get update
+    - apt-get install -y google-chrome-stable
+    - cd frontendproject     
+    - npm install           
+    - npx ng build
+  script:     
+    - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox 
+
+
+test_backend:
+  stage: test
+  image: maven:3.9.5-eclipse-temurin-21-alpine
+  before_script: []
+  script:
+    - echo "🧪 Test backend"
+    - cd backendproject
+    - mvn clean install -DskipTests
+
+push_images:
+  stage: push
+  image: docker:24.0.2
+  services:
+    - docker:24.0.2-dind
+  dependencies:
+    - build_images
+  script:
+    - echo "📦 Chargement des images depuis docker-images.tar"
+    - docker load -i docker-images.tar
+    - echo "🔐 Connexion à Docker Hub"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "📤 Push des images vers Docker Hub"
+    - docker tag deployanyinit-backend docker.io/$DOCKER_USERNAME/backend
+    - docker push docker.io/$DOCKER_USERNAME/backend
+    - docker tag deployanyinit-frontend docker.io/$DOCKER_USERNAME/frontend
+    - docker push docker.io/$DOCKER_USERNAME/frontend
+
+deploy:
+  stage: deploy
+  image: docker:24.0.2
+  services:
+    - docker:24.0.2-dind
+  script:
+    - echo "🚀 Déploiement de l'application"
+    - docker compose -f compose.yaml up -d
+    - docker ps
+  when: on_success

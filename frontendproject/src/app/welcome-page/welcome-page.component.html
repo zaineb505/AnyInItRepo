@@ -1,0 +1,120 @@
+<div class="app-container">
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <img src="assets/logo2.png" alt="Deploy Logo" class="navbar-logo">
+    </div>
+
+    <div class="navbar-links">
+      <a routerLink="/guide" class="nav-link" routerLinkActive="active">Guide</a>
+      <a class="nav-link" (click)="scrollToSection('pipeline-section', $event)">Pipeline</a>
+      <a class="nav-link" (click)="scrollToSection('contact-section', $event)">Contact</a>
+      <!-- Ajoutez ici le bouton de login si nécessaire -->
+    </div>
+  </div>
+</nav>
+
+  <main class="content-section">
+    <div class="text-content">
+      <h1>Flow with us one platform infinite possibilities</h1>
+      <div class="divider"></div>
+      <p class="subtitle">DeployAnyInIT — Code Dreams. Click Reality</p>
+      <button class="cta-button" (click)="navigateToLogin()">
+        <span>Start Deploying</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="image-container">
+      <img src="assets/back1.png" alt="Platform Illustration" class="right-image">
+    </div>
+  </main>
+</div>
+
+<section class="pipeline-section" id="pipeline-section">
+  <h2 class="pipeline-title">Your Deployment Journey</h2>
+  <p class="pipeline-subtitle">Follow the path to transform code into production</p>
+
+  <div class="pipeline-track">
+    <div class="progress-line"></div>
+
+    @for (step of steps; track step.id) {
+      <div class="step" (click)="activateStep(step.id)" [class.active]="activeStep >= step.id">
+        @if (activeStep === step.id) {
+          <!-- Optional: You can add tooltip back here if needed -->
+        }
+        <div class="step-icon" (click)="navigateToDocs(step.docsUrl, $event)">
+          <img [src]="step.icon" [alt]="step.title">
+        </div>
+        <h3>{{step.title}}</h3>
+        <p>{{step.subtitle}}</p>
+
+      </div>
+    }
+  </div>
+
+
+</section>
+
+<section class="contact-section" id="contact-section">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2>Let's Build Something Amazing</h2>
+      <p>Have questions or ready to deploy? Our team will help you streamline your workflow.</p>
+
+      <div class="contact-methods">
+        <div class="contact-method">
+          <i class="fas fa-envelope"></i>
+          <span>{{emailAddress}}</span>
+        </div>
+        <div class="contact-method">
+          <i class="fas fa-phone-alt"></i>
+          <span>+1 (555) 123-4567</span>
+        </div>
+        <div class="contact-method">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>San Francisco, CA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-header">
+        <div class="step-indicator">
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+        <h3>Send us a message</h3>
+      </div>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" [class.focused]="contactForm.get('name')?.value">
+          <label>Name</label>
+          <input type="text" formControlName="name">
+        </div>
+
+        <div class="form-group" [class.focused]="contactForm.get('email')?.value">
+          <label>Email</label>
+          <input type="email" formControlName="email">
+        </div>
+
+        <div class="form-group" [class.focused]="contactForm.get('message')?.value">
+          <label>Message</label>
+          <textarea formControlName="message"></textarea>
+        </div>
+
+        @if (formError) {
+          <div class="error-message">{{formError}}</div>
+        }
+
+        @if (formSubmitted) {
+          <div class="success-message">Message sent successfully!</div>
+        }
+
+        <button type="submit" class="submit-btn" [disabled]="!contactForm.valid">
+          Submit <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

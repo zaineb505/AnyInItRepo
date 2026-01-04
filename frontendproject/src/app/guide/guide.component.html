@@ -1,0 +1,502 @@
+<div class="doc-layout">
+  <!-- Side Navigation -->
+  <nav class="doc-sidenav">
+    <ul>
+      <li><a (click)="scrollTo('overview')" class="nav-link">Overview</a></li>
+      <li><a (click)="scrollTo('github')" class="nav-link">GitHub</a></li>
+      <li><a (click)="scrollTo('gitlab')" class="nav-link">GitLab</a></li>
+      <li><a (click)="scrollTo('docker')" class="nav-link">Docker</a></li>
+      <li><a (click)="scrollTo('kubernetes')" class="nav-link">Kubernetes</a></li>
+    </ul>
+  </nav>
+
+  <!-- Documentation Content -->
+  <main class="doc-content">
+    <section id="overview">
+      <h2> Pourquoi DeployanyInIt ? </h2>
+
+  <div class="mission">
+    <h3>Mission</h3>
+    <p>
+     plateforme cloud révolutionne le déploiement d'applications en <strong>simplifiant le processus DevOps</strong>
+      pour les développeurs débutants. Elle élimine la complexité traditionnelle grâce à :
+    </p>
+    <ul class="value-props">
+      <li>Une interface <strong>100% visuelle</strong> sans ligne de commande</li>
+      <li>Des pipelines <strong>pré-configurés</strong> pour les stacks courantes</li>
+      <li>Une automatisation <strong>de bout en bout</strong></li>
+    </ul>
+  </div>
+
+  <div class="for-beginners">
+    <h3>Pourquoi les Débutants Adorent Notre Solution ?</h3>
+    <div class="beginner-benefits">
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Zéro Configuration</h4>
+        <p>Plus besoin de comprendre les fichiers YAML ou les scripts Shell</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Automatisation Intelligente</h4>
+        <p>Détection automatique du langage et configuration optimale</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Plug-and-Play</h4>
+        <p>Connectez simplement votre dépôt Git et laissez la magie opérer</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="technical-simplified">
+    <h3>Complexité Technique Simplifiée</h3>
+    <table class="tech-comparison">
+      <tr>
+        <th>Étape Traditionnelle</th>
+        <th>Notre Solution</th>
+      </tr>
+      <tr>
+        <td>Configuration manuelle CI/CD</td>
+        <td>Pipelines pré-construits avec détection automatique</td>
+      </tr>
+      <tr>
+        <td>Écriture de Dockerfiles</td>
+        <td>Conteneurisation automatique via Paketo Buildpacks</td>
+      </tr>
+      <tr>
+        <td>Gestion des secrets</td>
+        <td>Stockage sécurisé intégré</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="getting-started-cta">
+    <h3>Commencez en 2 Minutes</h3>
+    <ol class="quick-steps">
+      <li>Connectez votre compte GitHub</li>
+      <li>Sélectionnez votre dépôt</li>
+        </ol>
+    <p class="cta-note">
+      Aucune connaissance en Kubernetes, Docker ou GitLab CI requise !
+    </p>
+  </div>
+    </section>
+
+    <section id="github">
+      <h2>Gestion de Code : Github</h2>
+
+  <div class="repo-creation">
+    <h3>1. Créer un nouveau dépôt GitHub</h3>
+
+    <div class="instruction-card">
+      <h4>Étape 1 : Accéder à GitHub</h4>
+      <p>
+        <a href="https://github.com" target="_blank">Connectez-vous à GitHub</a> et cliquez sur <strong>"+"</strong> puis <strong>"New repository"</strong>
+      </p>
+      <img src="assets\newRepo2.png" alt="Bouton New Repository sur GitHub" class="demo-image">
+    </div>
+
+    <div class="instruction-card">
+      <h4>Étape 2 : Configurer le dépôt</h4>
+      <ul>
+        <li><strong>Nom du dépôt</strong> : Choisissez un nom descriptif (ex: "mon-projet-angular")</li>
+        <li><strong>Description</strong> : Optionnelle mais recommandée</li>
+        <li><strong>Visibilité</strong> : Public (gratuit) ou Privé (nécessite un compte pro)</li>
+        <li>Cochez <strong>"Add a README file"</strong></li>
+      </ul>
+      <img src="assets/githubRepo2.png" alt="Paramètres de dépôt GitHub" class="demo-image">
+    </div>
+
+    <div class="instruction-card">
+      <h4>Étape 3 : Valider la création</h4>
+      <p>Cliquez sur <strong>"Create repository"</strong>. Votre URL sera de la forme :</p>
+      <code>https://github.com/[votre-username]/[nom-du-dépôt].git</code>
+    </div>
+  </div>
+
+  <div class="platform-usage">
+    <h3>2. Utiliser ce dépôt dans notre plateforme</h3>
+
+    <div class="instruction-card">
+      <h4>Étape 1 : Autoriser l'accès</h4>
+      <p>
+        Notre plateforme demandera l'autorisation d'accéder à votre dépôt GitHub. Cliquez sur <strong>"Authorize"</strong>.
+      </p>
+      <div class="note">
+        <p>🔒 Nous utilisons les API officielles de GitHub et ne stockons jamais vos identifiants.</p>
+      </div>
+    </div>
+        <div class="instruction-card">
+      <h4>Étape 1 : Coller l'URL GitHub</h4>
+      <p>
+         Dans notre plateforme, après vous être authentifié via votre compte GitHub, sélectionnez l'opération Git que vous souhaitez exécuter en cliquant sur  <strong>"operation Git"</strong> et collez l'URL de votre dépôt :
+      </p>
+      <img src="assets/gestionCode.png" alt="Champ pour coller l'URL GitHub" class="demo-image">
+    </div>
+  </div>
+
+  <div class="troubleshooting">
+    <h3>🔍 Problèmes fréquents</h3>
+    <details>
+      <summary>Je ne vois pas mon dépôt après connexion</summary>
+      <p>Vérifiez que vous avez bien autorisé l'accès à l'organisation GitHub contenant le dépôt.</p>
+    </details>
+    <details>
+      <summary>Erreur d'autorisation</summary>
+      <p>Révoquez les droits de notre application dans <a href="https://github.com/settings/applications" target="_blank">vos paramètres GitHub</a> puis réessayez.</p>
+    </details>
+  </div>
+    </section>
+
+    <!-- Other sections would follow the same pattern -->
+    <section id="gitlab">
+     <h2>Pipelines CI : GitLab</h2>
+
+  <div class="repo-import">
+    <h3>1. Importer un dépôt existant vers GitLab</h3>
+
+    <div class="instruction-card">
+      <h4>Étape 1 : Créer un nouveau projet</h4>
+      <p>
+        <a href="https://gitlab.com" target="_blank">Connectez-vous à GitLab</a> et cliquez sur <strong>"New project"</strong>
+      </p>
+      <img src="assets/newProjectGitlab.png" alt="Menu New project GitLab" class="demo-image">
+    </div>
+
+    <div class="instruction-card">
+      <h4>Étape 2 : Sélectionner l'import</h4>
+      <p>
+        Choisissez l'onglet <strong>"Import project"</strong> puis sélectionnez <strong>"GitHub"</strong>
+      </p>
+      <img src="assets/importProject.png" alt="Option d'import GitHub" class="demo-image">
+      <img src="assets/gitimpo.png" alt="Option d'import GitHub" class="demo-image">
+    </div>
+
+    <div class="instruction-card">
+      <h4>Étape 3 : Connecter GitHub</h4>
+      <ol>
+        <li>Autorisez l'accès lorsque demandé</li>
+        <li>Sélectionnez votre dépôt GitHub</li>
+      </ol>
+      <div class="note">
+        <p>🔒 La connexion utilise l'API officielle GitHub OAuth</p>
+      </div>
+    </div>
+  <div class="status-monitoring">
+    <h3>2. Suivi de l'importation</h3>
+    <div class="status-card">
+      <p>L'import peut prendre plusieurs minutes selon la taille du dépôt. Vous verrez :</p>
+      <img src="assets/impoValide.png" alt="Barre de progression GitLab" class="demo-image">
+      <div class="status-note">
+        <p>Actualisez la page pour voir la progression</p>
+      </div>
+    </div>
+  </div>
+  <div class="instruction-card">
+    <h4>Étape 3 : Obtenir l'URL GitLab</h4>
+    <p>Après l'import, copiez l'URL de votre nouveau dépôt GitLab :</p>
+    <ol>
+      <li>Cliquez sur <strong>"Clone"</strong> dans votre projet GitLab</li>
+      <li>Copiez l'URL HTTPS (format ci-dessous)</li>
+    </ol>
+    <div class="code-block">
+      <code>https://gitlab.com/votre-utilisateur/votre-projet.git</code>
+    </div>
+    <img src="assets/UrlRepoGitlab.png" alt="Copie d'URL GitLab" class="demo-image">
+
+  <div class="instruction-card">
+    <h4>Étape 4 : Coller l'URL GitLab</h4>
+<p>Dans notre plateforme, après avoir collé votre URL GitLab,  puis sélectionnez Le langage de votre projet ,L'image Docker appropriée et Les jobs CI. Cliquez sur <strong>"Générer le fichier"</strong>   Le fichier <code>.gitlab-ci.yml</code> est alors automatiquement créé en fonction de vos sélections</p>
+    <img src="assets/testbuild.png" alt="Collage d'URL dans la plateforme" class="demo-image">
+      <img src="assets/gitlabCi2.png" alt="Collage d'URL dans la plateforme" class="demo-image">
+  <p>Le fichier généré peut être modifié en cliquant sur <strong>"Modifier"</strong>, puis enregistré pour appliquer les changements.</p>
+  </div>
+</div>
+  </div>
+  <div class="deployment-step">
+  <h3>Étape finale : Déploiement sur GitLab</h3>
+
+  <div class="instruction-card">
+    <h4>1. Cliquez sur "Déployer sur GitLab"</h4>
+    <p>
+      Après validation de votre configuration CI/CD, lancez le processus complet en cliquant sur le bouton <strong> "Deployer sur Gitlab"</strong>
+    </p>
+  </div>
+
+  <div class="verification-important">
+    <h4>⚠️ Vérification de compte obligatoire</h4>
+    <div class="verification-modal">
+      <p>
+        Si votre compte GitLab n'est pas complètement vérifié :
+      </p>
+      <ul>
+        <li>Une fenêtre modale s'affiche avec un lien de vérification</li>
+        <li>Vous devrez confirmer votre numéro de téléphone</li>
+        <li>Cette étape est <strong>essentielle</strong> car :
+          <ol>
+            <li>GitLab l'exige pour tous les déploiements CI/CD</li>
+            <li>Elle sécurise l'exécution des pipelines</li>
+            <li>Elle prévient les abus du système</li>
+            <li>Elle active les fonctionnalités complètes de GitLab</li>
+          </ol>
+        </li>
+      </ul>
+      <img src="assets/verificationSMS.png" alt="Modal de vérification GitLab" class="demo-image">
+    </div>
+  </div>
+
+  <div class="final-steps">
+    <h4>2. Finalisation du processus</h4>
+  <p>
+      Complétez la vérification sur GitLab par cliquez sur <strong>"j'ai Terminé la verification"</strong> dans la modale
+      et puis relancez le déploiement en cliquant à nouveau sur<strong> "Deployer sur Gitlab"</strong>
+</p>
+    <div class="result">
+      <p>
+  Notre plateforme commit et push automatiquement le fichier <code>.gitlab-ci.yml</code> dans votre dépôt GitLab, déclenche immédiatement l'exécution du pipeline, puis vous redirige vers l'interface pour suivre son avancement.
+</p>
+    </div>
+  </div>
+  </div>
+  <div class="troubleshooting">
+    <h3>🔍 Problèmes fréquents</h3>
+    <details>
+      <summary>Échec de l'authentification GitHub</summary>
+      <p>Solution : Révoquez les permissions dans <a href="https://github.com/settings/applications" target="_blank">GitHub Settings > Applications</a> puis réessayez.</p>
+    </details>
+    <details>
+      <summary>Dépôt vide après import</summary>
+      <p>Solution : Vérifiez que le dépôt source n'est pas vide et que vous avez les permissions nécessaires.</p>
+    </details>
+  </div>
+  <section id="docker">
+  <h2>Conteneurisation avec Docker</h2>
+
+  <div class="docker-process">
+    <h3>1. Configuration du déploiement Docker</h3>
+
+    <div class="instruction-card">
+      <h4>Étape 1 : Fournir le dépôt GitLab</h4>
+      <p>
+        Après avoir importé votre dépôt GitHub vers GitLab, copiez l'URL GitLab :
+      </p>
+      <div class="code-block">
+        <code>https://gitlab.com/votre-utilisateur/votre-depot.git</code>
+      </div>
+    </div>
+
+    <div class="instruction-card">
+      <h4>Étape 2 : Configuration des ports</h4>
+      <p>
+        Spécifiez le port utilisé par votre application :
+      </p>
+      <div class="port-config">
+        <div class="config-example">
+          <strong>Port application</strong>
+          <div class="value-box">8080</div>
+          <p class="hint">(ex: 3000 pour Node.js, 8080 pour Java Spring Boot)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="docker-image-config">
+    <h3>2. Sélection de l'image Docker</h3>
+
+    <div class="instruction-card">
+      <h4>Détection automatique</h4>
+      <p>
+        Notre plateforme détecte automatiquement le langage et propose une image de base appropriée :
+      </p>
+      <div class="auto-detection">
+        <div class="detected-image">
+          <strong>Image suggérée :</strong>
+          <div class="value-box">auto-Node</div>
+        </div>
+      </div>
+      <div class="note">
+        <p>Les préfixes "auto-" indiquent une configuration automatique (ex: auto-Node, auto-Python, auto-Java)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="docker-deploy">
+    <h3>3. Lancement de la conteneurisation</h3>
+
+    <div class="instruction-card">
+      <h4>Étape finale : Conteneuriser</h4>
+      <p>
+        Cliquez sur le bouton <strong>"Conteneuriser"</strong> pour Lancer le build de l'image Docker et le conteneuriser.
+      </p>
+      <img src="assets/docker1.png" alt="Bouton Conteneuriser" class="demo-image">
+    </div>
+  </div>
+<div class="docker-results">
+  <h3>4. Résultats du Build Docker</h3>
+
+  <div class="results-grid">
+    <!-- Capture d'écran des logs -->
+    <div class="screenshot-container">
+      <div class="screenshot-header">
+        <h4>Sortie du terminal Docker</h4>
+        <div class="status-tags">
+          <span class="tag success-tag">Succès</span>
+          <span class="tag error-tag">Erreur</span>
+        </div>
+      </div>
+      
+      <img src="assets/logDocker.png" alt="Logs réels du build Docker" class="demo-image">
+      
+      <div class="log-legend">
+        <div class="legend-item">
+          <span class="indicator success-indicator"></span>
+          <span>Build réussi (ligne de commande complète)</span>
+        </div>
+        <div class="legend-item">
+          <span class="indicator error-indicator"></span>
+          <span>Erreur détectée (avec diagnostic automatique)</span>
+        </div>
+        <div class="legend-item">
+          <span class="indicator warning-indicator"></span>
+          <span>Avertissement de version</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="troubleshooting">
+  <h3>🔍 Problèmes fréquents</h3>
+  
+  <details>
+    <summary>Échec de la détection automatique</summary>
+    <div class="solution">
+      <p><strong>Cause :</strong> Fichiers caractéristiques manquants ou structure de projet non standard</p>
+      <p><strong>Solution :</strong></p>
+      <ul>
+        <li>Vérifiez que votre dépôt contient bien :
+          <ul>
+            <li><code>package.json</code> pour Node.js</li>
+            <li><code>pom.xml</code> ou <code>build.gradle</code> pour Java</li>
+            <li><code>requirements.txt</code> pour Python</li>
+          </ul>
+        </li>
+        <li>Si vous utilisez une structure non standard, spécifiez manuellement le langage</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Port déjà utilisé</summary>
+    <div class="solution">
+      <p><strong>Cause :</strong> Le port spécifié est occupé par un autre service</p>
+      <p><strong>Solution :</strong></p>
+      <ul>
+        <li>Changez le port de votre application dans son fichier de configuration</li>
+        <li>Ou spécifiez un port hôte différent dans les paramètres Docker :
+          <pre><code>ports:
+  - "NouveauPort:PortConteneur"</code></pre>
+        </li>
+        <li>Listez les ports utilisés avec : <code>netstat -tuln</code> (Linux) ou <code>Get-NetTCPConnection</code> (PowerShell)</li>
+      </ul>
+    </div>
+  </details>
+<details>
+  <summary>Problèmes de version incompatibles</summary>
+  <div class="solution">
+    <p><strong>Cause :</strong> La version du langage utilisée ne correspond pas aux exigences du projet.</p>
+    
+    <h5>Solution :</h5>
+    
+    <ol>
+      <li>
+        <strong>Identifiez la version requise</strong> :
+        <ul>
+          <li>Consultez le fichier de configuration du projet :
+            <ul>
+              <li><code>package.json</code> (Node.js)</li>
+              <li><code>pom.xml</code> ou <code>build.gradle</code> (Java)</li>
+              <li><code>requirements.txt</code> (Python)</li>
+            </ul>
+          </li>
+          <li>Recherchez les indications de version (ex: <code>"node": ">=16.0.0"</code>, <code>java.version=17</code>)</li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Mettez à jour votre environnement</strong> :
+        <ul>
+          <li>Installez la version correspondante localement</li>
+          <li>Configurez votre outil de déploiement pour utiliser cette version</li>
+        </ul>
+      </li>
+      
+      <li>
+        <strong>Bonnes pratiques</strong> :
+        <ul>
+          <li>Privilégiez les versions LTS (Long Term Support)</li>
+          <li>Documentez clairement les exigences de version</li>
+          <li>Testez systématiquement les mises à jour</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="note">
+      <p>ℹ️ La plupart des projets documentent leurs exigences de version dans leur fichier de configuration principal.</p>
+    </div>
+  </div>
+</details>
+  <details>
+    <summary>Échec d'installation des dépendances</summary>
+    <div class="solution">
+      <p><strong>Cause :</strong> Problème avec npm/pip/Maven/Gradle</p>
+      <p><strong>Solution :</strong></p>
+      <ul>
+        <li><strong>Node.js :</strong>
+          <ul>
+            <li>Supprimez <code>node_modules</code> et <code>package-lock.json</code></li>
+            <li>Relancez <code>npm install</code></li>
+          </ul>
+        </li>
+        <li><strong>Python :</strong>
+          <ul>
+            <li>Créez un environnement virtuel : <code>python -m venv venv</code></li>
+            <li>Activez-le puis : <code>pip install -r requirements.txt</code></li>
+          </ul>
+        </li>
+        <li><strong>Java :</strong>
+          <ul>
+            <li>Maven : <code>mvn dependency:purge-local-repository</code></li>
+            <li>Gradle : Supprimez le dossier <code>.gradle</code></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </details>
+</div>
+</section>
+</section>
+<section id="end-section" class="simple-end">
+  <div class="summary-box">
+    <h3>📝 Ce que vous avez appris</h3>
+    <ul>
+      <li>Déployer des applications depuis GitHub/GitLab</li>
+      <li>Configurer des pipelines CI/CD sans complexité</li>
+      <li>Conteneuriser avec Docker en un clic</li>
+    </ul>
+  </div>
+
+  <div class="support-box">
+    <h3>❔ Besoin d'aide ?</h3>
+    <p>Notre équipe est disponible pour vous accompagner : 📨 <a href="mailto:support&#64;deployanyinit.com" class="support-link">support&#64;deployanyinit.com</a></p>
+  </div>
+
+  <div class="action-box">
+    <p>Prêt à commencer ?</p>
+    <a routerLink="/login" class="action-button">Lancer un déploiement</a>
+  </div>
+</section>
+  </main>
+</div>
